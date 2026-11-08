@@ -3,98 +3,715 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="StudyPulse - শিক্ষার্থীদের স্মার্ট স্টাডি টাইমার।">
-  <title>StudyPulse – Smart Study Timer</title>
+
+  <meta name="theme-color" content="#071b3a">
+  <meta name="description" content="StudyPulse - Smart Study Timer. Track your study hours, build consistency, view your calendar and compete on the global leaderboard. Free Android app by FutureVisionAI.">
+
+  <meta property="og:title" content="StudyPulse - Smart Study Timer">
+  <meta property="og:description" content="পড়াশোনার সময় হিসাব রাখুন, নিজের অগ্রগতি দেখুন এবং এগিয়ে যান।">
+  <meta property="og:type" content="website">
+
+  <title>StudyPulse – Smart Study Timer | FutureVisionAI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
-    * { box-sizing: border-box; }
-    body {
+    :root {
+      --bg: #071b3a;
+      --blue: #2878ff;
+      --cyan: #35d5ef;
+      --text: #102442;
+      --muted: #65758b;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f9ff;
-      color: #123047;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+      background: #f4f8ff;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(circle at 85% 20%, #2878ff55, transparent 35%),
+        radial-gradient(circle at 10% 90%, #35d5ef30, transparent 35%),
+        linear-gradient(135deg, #06152f, #0c3266 65%, #07518c);
+      padding: 25px 20px 90px;
+    }
+
+    .navbar {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-family: Inter, sans-serif;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .brand-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #35d5ef, #2878ff);
+      border-radius: 14px;
+      font-size: 24px;
+    }
+
+    .nav-link {
+      color: #d8e8ff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero-content {
+      max-width: 1050px;
+      margin: 85px auto 0;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 15px;
+      border: 1px solid #ffffff35;
+      background: #ffffff12;
+      color: #a8efff;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: Inter, 'Hind Siliguri', sans-serif;
+      font-size: clamp(38px, 6vw, 65px);
+      line-height: 1.15;
+      font-weight: 900;
+      margin-bottom: 22px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #35d5ef, #8dbaff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #d2e2f8;
+      font-size: 18px;
+      line-height: 1.9;
+      max-width: 570px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      padding: 15px 24px;
+      border-radius: 13px;
+      font-weight: 700;
+      font-size: 16px;
+      transition: .25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #35d5ef, #2878ff);
+      color: white;
+      box-shadow: 0 10px 30px #2878ff50;
+    }
+
+    .btn-secondary {
+      color: white;
+      border: 1px solid #ffffff55;
+      background: #ffffff12;
+    }
+
+    .hero-note {
+      font-size: 13px !important;
+      margin-top: 15px;
+      color: #a9c4e8 !important;
+    }
+
+    .app-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .phone {
+      width: 255px;
+      padding: 13px;
+      border: 2px solid #ffffff45;
+      background: linear-gradient(145deg, #173d72, #06152f);
+      border-radius: 35px;
+      box-shadow: 0 30px 70px #0007;
+      transform: rotate(4deg);
+    }
+
+    .phone-screen {
+      background: #f6f9ff;
+      color: #102442;
+      border-radius: 25px;
+      padding: 22px 16px;
       text-align: center;
     }
-    header {
-      padding: 24px;
-      background: #063b63;
+
+    .phone-logo {
+      width: 53px;
+      height: 53px;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #35d5ef, #2878ff);
       color: white;
+      font-size: 28px;
     }
-    .logo {
-      font-size: 42px;
-      margin: 15px;
-    }
-    main {
-      max-width: 650px;
-      margin: 35px auto;
-      padding: 25px;
-    }
-    .card {
-      background: white;
-      padding: 30px 20px;
-      border-radius: 20px;
-      box-shadow: 0 5px 25px #12304715;
-    }
-    h1 { color: #087da8; }
-    .download {
-      display: inline-block;
-      margin: 22px 0;
-      padding: 16px 30px;
-      background: #087da8;
-      color: white;
-      text-decoration: none;
+
+    .phone-screen h3 {
+      font-family: Inter, sans-serif;
+      margin: 12px 0 4px;
       font-size: 18px;
-      font-weight: bold;
+    }
+
+    .phone-screen p {
+      color: #73839b;
+      font-size: 11px;
+    }
+
+    .timer-circle {
+      width: 155px;
+      height: 155px;
+      margin: 22px auto;
+      border-radius: 50%;
+      border: 8px solid #dbeaff;
+      border-top-color: #2878ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .timer-circle strong {
+      font-family: Inter, sans-serif;
+      font-size: 26px;
+    }
+
+    .timer-circle small {
+      color: #2878ff;
+      font-weight: 700;
+    }
+
+    .phone-subject {
+      background: #e9f1ff;
+      padding: 12px;
       border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
     }
+
+    .phone-bottom {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 17px;
+      font-size: 19px;
+    }
+
+    .trust {
+      max-width: 950px;
+      margin: -35px auto 0;
+      position: relative;
+      background: white;
+      border-radius: 18px;
+      padding: 23px;
+      box-shadow: 0 10px 35px #17385d12;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      gap: 15px;
+    }
+
+    .trust strong {
+      display: block;
+      color: #2878ff;
+      font-size: 17px;
+    }
+
+    .trust span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      padding: 75px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 40px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      margin-bottom: 12px;
+      color: #102d52;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
     .features {
-      text-align: left;
-      line-height: 2.1;
-      margin: 20px auto;
-      max-width: 330px;
+      max-width: 1050px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-    footer {
+
+    .feature {
+      background: white;
+      border: 1px solid #e6eef9;
+      border-radius: 18px;
       padding: 25px;
-      color: #557080;
+      transition: .25s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px #17385d12;
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: #eaf2ff;
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .feature h3 {
+      font-size: 19px;
+      margin-bottom: 9px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .about {
+      background: white;
+    }
+
+    .about-content {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      line-height: 2;
+      font-size: 16px;
+    }
+
+    .download-section {
+      background: linear-gradient(135deg, #06152f, #104b85);
+      color: white;
+      text-align: center;
+    }
+
+    .download-section h2 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .download-section p {
+      color: #d1e3fa;
+      line-height: 1.9;
+    }
+
+    .download-section .btn {
+      margin-top: 25px;
+    }
+
+    .version {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #b9d1ef;
+    }
+
+    .faq {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      background: white;
+      border: 1px solid #e6eef9;
+      border-radius: 13px;
+      padding: 17px 20px;
+      margin-bottom: 12px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    details p {
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    footer {
+      background: #06152f;
+      color: #c1d3eb;
+      text-align: center;
+      padding: 35px 20px;
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    @media(max-width: 750px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        margin-top: 60px;
+      }
+
+      .hero p {
+        margin: auto;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
+      .app-visual {
+        margin-top: 20px;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+    }
+
+    @media(max-width: 480px) {
+      .hero {
+        padding-bottom: 70px;
+      }
+
+      .hero-content {
+        margin-top: 45px;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .trust {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title h2,
+      .download-section h2 {
+        font-size: 27px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">📚</div>
-    <h1 style="color:white">StudyPulse</h1>
-    <p>Study Smarter. Track Your Progress.</p>
-    <p>by FutureVisionAI</p>
-  </header>
 
-  <main>
-    <div class="card">
-      <h1>আপনার পড়াশোনার সঙ্গী</h1>
-      <p>প্রতিদিন কত ঘণ্টা পড়াশোনা করছেন, তা সহজেই হিসাব রাখুন StudyPulse দিয়ে।</p>
+<header class="hero">
 
-      <div class="features">
-        ✅ Smart Study Timer<br>
-        ✅ Daily Study Calendar<br>
-        ✅ Global Leaderboard<br>
-        ✅ Personal Profile<br>
-        ✅ Profile Picture Update<br>
-        ✅ বাংলা ও English ভাষা
+  <nav class="navbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">📚</span>
+      <span>StudyPulse</span>
+    </a>
+    <a class="nav-link" href="#features">Features / ফিচার</a>
+  </nav>
+
+  <div class="hero-content">
+
+    <div>
+      <span class="tag">🇧🇩 Made for Students of Bangladesh</span>
+
+      <h1>
+        Study Smarter.<br>
+        <span>Achieve More.</span>
+      </h1>
+
+      <p>
+        পড়াশোনার প্রতিটি মিনিটের হিসাব রাখুন।
+        নিজের অগ্রগতি দেখুন, প্রতিদিন নতুন লক্ষ্য তৈরি করুন
+        এবং StudyPulse-এর সঙ্গে আরও নিয়মিত হয়ে উঠুন।
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary"
+           href="https://github.com/futurevisionai67-hue/studypulse-download/releases/latest"
+           target="_blank" rel="noopener">
+          ⬇ Download APK
+        </a>
+
+        <a class="btn btn-secondary" href="#features">
+          ✨ Explore Features
+        </a>
       </div>
 
-      <!-- RELEASE APK LINK HERE -->
-      <a class="download"
-         href="https://github.com/YOUR_USERNAME/studypulse-download/releases/latest"
-         target="_blank">
-         Download StudyPulse
-      </a>
-
-      <p>Android App | Free Download</p>
-      <p>Version: 1.0.1</p>
+      <p class="hero-note">
+        Android App • Free Download • বাংলা ও English
+      </p>
     </div>
-  </main>
 
-  <footer>
-    © 2026 StudyPulse by FutureVisionAI
-    <br>Made for students of Bangladesh 🇧🇩
-  </footer>
+    <div class="app-visual">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-logo">📚</div>
+          <h3>StudyPulse</h3>
+          <p>Smart Study Timer</p>
+
+          <div class="timer-circle">
+            <strong>01:25:30</strong>
+            <small>STUDY TIME</small>
+          </div>
+
+          <div class="phone-subject">
+            📖 Mathematics
+          </div>
+
+          <div class="phone-bottom">
+            <span>⌂</span>
+            <span>▦</span>
+            <span>🏆</span>
+            <span>👤</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div class="trust">
+  <div>
+    <strong>⏱ Smart Timer</strong>
+    <span>Track your study time</span>
+  </div>
+  <div>
+    <strong>📅 Daily Progress</strong>
+    <span>See your study history</span>
+  </div>
+  <div>
+    <strong>🌐 Global Ranking</strong>
+    <span>Compete with students</span>
+  </div>
+</div>
+
+<section id="features">
+
+  <div class="section-title">
+    <h2>StudyPulse Features</h2>
+    <p>
+      পড়াশোনাকে আরও সুন্দর, নিয়মিত ও পরিকল্পিত করতে
+      প্রয়োজনীয় ফিচারগুলো এক জায়গায়।
+    </p>
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="feature-icon">⏱️</div>
+      <h3>Smart Study Timer</h3>
+      <p>বিষয় নির্বাচন করে পড়াশোনা শুরু করুন এবং প্রতিটি সেশনের সময় সংরক্ষণ করুন।</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">📅</div>
+      <h3>Study Calendar</h3>
+      <p>কোন দিন কত ঘণ্টা পড়েছেন তা ক্যালেন্ডারে দেখুন।</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🏆</div>
+      <h3>Global Leaderboard</h3>
+      <p>মোট পড়াশোনার সময় অনুযায়ী অন্য শিক্ষার্থীদের সঙ্গে নিজের অবস্থান দেখুন।</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">👤</div>
+      <h3>Personal Profile</h3>
+      <p>নিজের প্রোফাইল, ছবি, মোট পড়াশোনার সময় এবং অগ্রগতি দেখুন।</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🌐</div>
+      <h3>Bangla & English</h3>
+      <p>নিজের পছন্দমতো বাংলা অথবা ইংরেজি ভাষায় অ্যাপ ব্যবহার করুন।</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">☁️</div>
+      <h3>Cloud Sync</h3>
+      <p>ইন্টারনেট সংযোগ থাকলে আপনার পড়াশোনার তথ্য Firebase-এর সঙ্গে Sync করুন।</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-content">
+    <div class="section-title">
+      <h2>About StudyPulse</h2>
+      <p>শুধু সময় নয়, প্রতিদিনের অগ্রগতিই আপনার সাফল্যের চাবিকাঠি।</p>
+    </div>
+
+    <p>
+      StudyPulse হলো শিক্ষার্থীদের জন্য তৈরি একটি Smart Study Timer Android App।
+      এটি আপনাকে পড়াশোনার সময় হিসাব রাখতে, দৈনিক অগ্রগতি দেখতে এবং
+      নিজের পড়াশোনার ধারাবাহিকতা বজায় রাখতে সাহায্য করে।
+      StudyPulse তৈরি করেছে FutureVisionAI।
+    </p>
+  </div>
+</section>
+
+<section class="download-section" id="download">
+  <h2>Ready to Study Smarter?</h2>
+
+  <p>
+    আজ থেকেই নিজের পড়াশোনার সময় হিসাব রাখা শুরু করুন।<br>
+    StudyPulse ডাউনলোড করুন সম্পূর্ণ বিনামূল্যে।
+  </p>
+
+  <a class="btn btn-primary"
+     href="https://github.com/futurevisionai67-hue/studypulse-download/releases/latest"
+     target="_blank" rel="noopener">
+    ⬇ Download StudyPulse APK
+  </a>
+
+  <div class="version">
+    Latest Release: v1.0.0 • Android • Free
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Frequently Asked Questions</h2>
+    <p>StudyPulse সম্পর্কে সাধারণ কিছু প্রশ্নের উত্তর।</p>
+  </div>
+
+  <div class="faq">
+
+    <details>
+      <summary>StudyPulse কী?</summary>
+      <p>StudyPulse একটি Android Smart Study Timer App, যা পড়াশোনার সময় ও অগ্রগতি হিসাব রাখতে সাহায্য করে।</p>
+    </details>
+
+    <details>
+      <summary>অ্যাপটি কি বিনামূল্যে?</summary>
+      <p>হ্যাঁ, এই ওয়েবসাইট থেকে StudyPulse APK বিনামূল্যে ডাউনলোড করতে পারবেন।</p>
+    </details>
+
+    <details>
+      <summary>বাংলা ভাষা ব্যবহার করা যাবে?</summary>
+      <p>হ্যাঁ, অ্যাপে বাংলা ও English ভাষা পরিবর্তনের সুবিধা রয়েছে।</p>
+    </details>
+
+    <details>
+      <summary>কীভাবে APK ইনস্টল করব?</summary>
+      <p>Download বাটনে চাপ দিয়ে APK ডাউনলোড করুন। তারপর ফোনে ফাইলটি খুলে Android-এর নির্দেশনা অনুযায়ী ইনস্টল করুন। অজানা উৎস থেকে ইনস্টলের অনুমতি চাইলে কেবল এই APK-এর জন্য প্রয়োজনীয় অনুমতি দিন।</p>
+    </details>
+
+  </div>
+</section>
+
+<footer>
+  <strong>📚 StudyPulse by FutureVisionAI</strong>
+  <br>
+  Study Smarter. Track Your Progress.
+  <br>
+  Made with ❤️ for students of Bangladesh 🇧🇩
+  <br>
+  © 2026 StudyPulse. All Rights Reserved.
+</footer>
+
 </body>
 </html>
